@@ -9,7 +9,7 @@
 
 using namespace chai3d;
 
-RigidStatic::RigidStatic(cVector3d a_position) : Rigidbody(a_position) {}
+RigidStatic::RigidStatic(const cVector3d a_position) : Rigidbody(a_position) {}
 
 void RigidStatic::ApplyForces(double a_deltaTime) {
     // We do not actually apply forces to ourselves because we are static

@@ -15,24 +15,24 @@ class Constraint;
 
 class SceneManager {
 public:
-    SceneManager(chai3d::cWorld *world);
+    explicit SceneManager(chai3d::cWorld *a_world);
     ~SceneManager();
 
-    void AddScene(Scene *scene);
-    void SetScene(int index);
+    void AddScene(Scene *a_scene);
+    void SetScene(int a_index);
     void NextScene();
     void PreviousScene();
 
     Scene* GetCurrentScene();
 
-    std::vector<Scene*> GetScenes();
+    std::vector<Scene*> GetScenes() const;
 
     void LoadCurrentScene();
 
-    void LoadConstraint(Constraint* a_constraint);
-    void LoadRigidbody(Rigidbody* a_body);
+    void LoadConstraint(Constraint* a_constraint) const;
+    void LoadRigidbody(Rigidbody* a_body) const;
 private:
-    int currentIndex;
-    std::vector<Scene*> scenes;
-    chai3d::cMesh *sceneWorld;
+    int m_currentIndex;
+    std::vector<Scene*> m_scenes;
+    chai3d::cMesh *m_sceneWorld;
 };

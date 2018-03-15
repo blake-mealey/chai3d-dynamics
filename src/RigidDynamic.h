@@ -12,7 +12,7 @@
 
 class RigidDynamic : public Rigidbody {
 public:
-    RigidDynamic(double a_mass = 1.0,
+    explicit RigidDynamic(double a_mass = 1.0,
         chai3d::cVector3d a_position = chai3d::cVector3d(0.0, 0.0, 0.0),
         chai3d::cVector3d a_linearVelocity = chai3d::cVector3d(0.0, 0.0, 0.0));
 

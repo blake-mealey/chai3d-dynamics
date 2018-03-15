@@ -14,47 +14,47 @@
 
 using namespace chai3d;
 
-SceneManager::SceneManager(cWorld *world) : currentIndex(-1) {
-    sceneWorld = new cMesh();
-    world->addChild(sceneWorld);
+SceneManager::SceneManager(cWorld *a_world) : m_currentIndex(-1) {
+    m_sceneWorld = new cMesh();
+    a_world->addChild(m_sceneWorld);
 }
 
 SceneManager::~SceneManager() {
-    delete sceneWorld;
+    delete m_sceneWorld;
 }
 
-void SceneManager::AddScene(Scene *scene) {
-    scenes.push_back(scene);
-    scene->m_manager = this;
+void SceneManager::AddScene(Scene *a_scene) {
+    m_scenes.push_back(a_scene);
+    a_scene->m_manager = this;
 }
 
-void SceneManager::SetScene(int index) {
-    if (currentIndex >= 0) {
+void SceneManager::SetScene(int a_index) {
+    if (m_currentIndex >= 0) {
         GetCurrentScene()->m_loaded = false;
     }
 
-    while (index < 0) index += scenes.size();		// Wrap negative values
-    index = index % scenes.size();					// Wrap positive values
+    while (a_index < 0) a_index += m_scenes.size();		// Wrap negative values
+    a_index = a_index % m_scenes.size();					// Wrap positive values
 
-    currentIndex = index;							// Load new scene
+    m_currentIndex = a_index;							// Load new scene
     LoadCurrentScene();
     GetCurrentScene()->m_loaded = true;
 }
 
 void SceneManager::NextScene() {
-    SetScene(currentIndex + 1);
+    SetScene(m_currentIndex + 1);
 }
 
 void SceneManager::PreviousScene() {
-    SetScene(currentIndex - 1);
+    SetScene(m_currentIndex - 1);
 }
 
 Scene* SceneManager::GetCurrentScene() {
-    return scenes[currentIndex];
+    return m_scenes[m_currentIndex];
 }
 
 void SceneManager::LoadCurrentScene() {
-    sceneWorld->clearAllChildren();
+    m_sceneWorld->clearAllChildren();
     Scene* scene = GetCurrentScene();
 
     for (Constraint* object : scene->m_constraints) {
@@ -70,16 +70,16 @@ void SceneManager::LoadCurrentScene() {
     }
 }
 
-void SceneManager::LoadConstraint(Constraint* a_constraint) {
-    sceneWorld->addChild(a_constraint->GetRenderMesh());
+void SceneManager::LoadConstraint(Constraint* a_constraint) const {
+    m_sceneWorld->addChild(a_constraint->GetRenderMesh());
 }
 
-void SceneManager::LoadRigidbody(Rigidbody* a_body) {
+void SceneManager::LoadRigidbody(Rigidbody* a_body) const {
     Collider *collider = a_body->GetCollider();
     if (!collider) return;
-    sceneWorld->addChild(collider->GetRenderMesh());
+    m_sceneWorld->addChild(collider->GetRenderMesh());
 }
 
-std::vector<Scene*> SceneManager::GetScenes() {
-    return scenes;
+std::vector<Scene*> SceneManager::GetScenes() const {
+    return m_scenes;
 }

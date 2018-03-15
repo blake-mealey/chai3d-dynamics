@@ -13,7 +13,7 @@ class Collider;
 class Rigidbody {
 public:
     virtual ~Rigidbody();
-    Rigidbody(chai3d::cVector3d a_position = chai3d::cVector3d(0.0, 0.0, 0.0));
+    explicit Rigidbody(chai3d::cVector3d a_position = chai3d::cVector3d(0.0, 0.0, 0.0));
 
     void ClearForces();
     void AddForce(chai3d::cVector3d a_force, chai3d::cVector3d a_localPosition = chai3d::cVector3d(0.0, 0.0, 0.0));

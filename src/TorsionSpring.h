@@ -23,6 +23,6 @@ protected:
     double m_springStiffness;
     double m_dampingConstant;
 
-    chai3d::cShapeLine* m_line1to0;
-    chai3d::cShapeLine* m_line1to2;
+    chai3d::cShapeLine* m_line1To0;
+    chai3d::cShapeLine* m_line1To2;
 };

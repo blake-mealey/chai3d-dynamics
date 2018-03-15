@@ -910,7 +910,7 @@ void close(void)
 void updateGraphics(void)
 {
 	// Clean up objects that should be deleted
-	sceneManager->GetCurrentScene()->DestroyMarkedChai3dObjects();
+	sceneManager->GetCurrentScene()->DestroyMarkedRenderObjects();
 
     /////////////////////////////////////////////////////////////////////
     // UPDATE WIDGETS

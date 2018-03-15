@@ -14,14 +14,14 @@ template <size_t N>
 class NConstraint : public Constraint {
 public:
     virtual ~NConstraint() = default;
-    NConstraint(std::array<Rigidbody*, N> a_bodies) : Constraint(), m_bodies(a_bodies) {}
+    explicit NConstraint(std::array<Rigidbody*, N> a_bodies) : Constraint(), m_bodies(a_bodies) {}
 
     size_t GetRigidbodyCount() const override {
         return N;
     }
 
-    Rigidbody* GetRigidbody(size_t index) const override {
-        return m_bodies[index];
+    Rigidbody* GetRigidbody(const size_t a_index) const override {
+        return m_bodies[a_index];
     }
 
     bool ConstrainsRigidbody(Rigidbody* a_body) const override {

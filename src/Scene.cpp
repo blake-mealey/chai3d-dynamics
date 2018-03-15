@@ -15,9 +15,11 @@
 
 using namespace chai3d;
 
-Scene::Scene() : m_loaded(false), m_cursorOffset(cVector3d(0.1, 0.0, 0.0)), m_cameraOffset(cVector3d(0.25, 0.0, 0.0)), m_workspaceLocked(false), m_killFloor(-1.0) { }
+Scene::Scene() : m_manager(nullptr), m_loaded(false), m_killFloor(-1.0), m_cursor(nullptr),
+                 m_cursorOffset(cVector3d(0.1, 0.0, 0.0)),
+                 m_workspaceLocked(false), m_cameraOffset(cVector3d(0.25, 0.0, 0.0)) { }
 
-Spring* Scene::CreateSpring(Rigidbody *a_body0, Rigidbody *a_body1, double a_naturalLength, double a_springStiffness, double a_dampingConstant) {
+Spring* Scene::CreateSpring(Rigidbody *a_body0, Rigidbody *a_body1, const double a_naturalLength, const double a_springStiffness, const double a_dampingConstant) {
     Spring* spring = new Spring(a_body0, a_body1, a_naturalLength, a_springStiffness, a_dampingConstant);
     AddConstraint(spring);
     return spring;
@@ -56,7 +58,7 @@ void Scene::DestroyStatic(RigidStatic* a_static) {
     m_staticsToDelete.insert(a_static);
 }
 
-RigidDynamic* Scene::CreateDynamic(double a_mass, chai3d::cVector3d a_position, chai3d::cVector3d a_velocity) {
+RigidDynamic* Scene::CreateDynamic(const double a_mass, const chai3d::cVector3d a_position, const chai3d::cVector3d a_velocity) {
     RigidDynamic* body = new RigidDynamic(a_mass, a_position, a_velocity);
     AddDynamic(body);
     return body;
@@ -72,7 +74,7 @@ void Scene::DestroyDynamic(RigidDynamic* a_dynamic) {
     m_dynamicsToDelete.insert(a_dynamic);
 }
 
-void Scene::DestroyMarkedChai3dObjects() {
+void Scene::DestroyMarkedRenderObjects() {
     for (cGenericObject* object : m_objectsToDelete) {
         object->getParent()->deleteChild(object);
     }

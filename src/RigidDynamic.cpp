@@ -9,17 +9,17 @@
 
 using namespace chai3d;
 
-RigidDynamic::RigidDynamic(double a_mass, cVector3d a_position, cVector3d a_linearVelocity) :
+RigidDynamic::RigidDynamic(const double a_mass, const cVector3d a_position, const cVector3d a_linearVelocity) :
     Rigidbody(a_position), m_mass(a_mass), m_linearVelocity(a_linearVelocity), m_angularVelocity(cVector3d(0.0, 0.0, 0.0)), m_angularMomentum(cVector3d(0.0, 0.0, 0.0)) {
 
     UpdateInertiaMatrix();
 }
 
-void RigidDynamic::ApplyForces(double a_deltaTime) {
+void RigidDynamic::ApplyForces(const double a_deltaTime) {
     // POSITIONAL
 
     // Compute current linear acceleration from current forces (a = F/m)
-    cVector3d acceleration = GetCurrentNetForce() / m_mass;
+    const cVector3d acceleration = GetCurrentNetForce() / m_mass;
 
     // Integrate linear acceleration to linear velocity
     m_linearVelocity = m_linearVelocity + a_deltaTime * acceleration;
@@ -37,16 +37,16 @@ void RigidDynamic::ApplyForces(double a_deltaTime) {
     m_angularVelocity = cInverse(m_inertiaMatrix) * m_angularMomentum / a_deltaTime;
 
     // Take the derivative of the current rotation to get the next rotation
-    cVector3d qV = cVector3d(m_rotation.x, m_rotation.y, m_rotation.z);
-    double q0Derivative = -0.5 * cDot(m_angularVelocity, qV);
+    const cVector3d qV = cVector3d(m_rotation.x, m_rotation.y, m_rotation.z);
+    const double q0Derivative = -0.5 * cDot(m_angularVelocity, qV);
     cVector3d qVDerivative = 0.5 * (m_rotation.w * m_angularVelocity + cCross(m_angularVelocity, qV));
-    cQuaternion derivative = cQuaternion(q0Derivative, qVDerivative.x(), qVDerivative.y(), qVDerivative.z());
+    const cQuaternion derivative = cQuaternion(q0Derivative, qVDerivative.x(), qVDerivative.y(), qVDerivative.z());
     m_rotation = m_rotation + a_deltaTime * derivative;
     m_rotation.normalize();		// Fix wobblies at high speeds
 
-                                // GRAPHICS
+    // GRAPHICS
 
-                                // Update colliders (clear collision count and update render mesh)
+    // Update colliders (clear collision count and update render mesh)
     if (m_collider) {
         m_collider->ClearCollisionCount();
 
@@ -63,7 +63,7 @@ void RigidDynamic::ApplyForces(double a_deltaTime) {
     ClearForces();
 }
 
-void RigidDynamic::SetMass(double a_mass) {
+void RigidDynamic::SetMass(const double a_mass) {
     m_mass = a_mass;
 }
 
@@ -71,7 +71,7 @@ double RigidDynamic::GetMass() const {
     return m_mass;
 }
 
-void RigidDynamic::SetLinearVelocity(cVector3d a_linearVelocity) {
+void RigidDynamic::SetLinearVelocity(const cVector3d a_linearVelocity) {
     m_linearVelocity = a_linearVelocity;
 }
 
@@ -79,7 +79,7 @@ cVector3d RigidDynamic::GetLinearVelocity() const {
     return m_linearVelocity;
 }
 
-void RigidDynamic::SetAngularVelocity(cVector3d a_angularVelocity) {
+void RigidDynamic::SetAngularVelocity(const cVector3d a_angularVelocity) {
     m_angularVelocity = a_angularVelocity;
 }
 

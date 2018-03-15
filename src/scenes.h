@@ -6,6 +6,5 @@
 
 #pragma once
 
-// Scenes
 #include "SceneManager.h"
 #include "Scene.h"

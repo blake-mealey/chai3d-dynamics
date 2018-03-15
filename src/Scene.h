@@ -56,7 +56,7 @@ public:
     void AddDynamic(RigidDynamic* a_dynamic);
     void DestroyDynamic(RigidDynamic* a_dynamic);
 
-    void DestroyMarkedChai3dObjects();
+    void DestroyMarkedRenderObjects();
     void DestroyMarkedObjects();
 
     void SetCursor(RigidStatic* a_cursor);

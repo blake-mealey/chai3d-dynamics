@@ -12,7 +12,7 @@
 
 class SphereCollider : public Collider {
 public:
-    SphereCollider(double a_radius = 0.01, double a_collisionStiffness = 1000.0, double a_dampingConstant = 10.0, size_t a_collisionFlag = 1, size_t a_collidesWithMask = 1);
+    explicit SphereCollider(double a_radius = 0.01, double a_collisionStiffness = 1000.0, double a_dampingConstant = 10.0, size_t a_collisionFlag = 1, size_t a_collidesWithMask = 1);
 
     Collision GetCollision(Collider* a_collider) const override;
 
@@ -21,7 +21,7 @@ public:
 
     chai3d::cMatrix3d GetInertiaMatrix() const override;
 private:
-    void CreateRenderMesh();
+    void CreateRenderMesh() const;
 
     double m_radius;
 };
