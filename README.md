@@ -1,12 +1,12 @@
 # About
 
-This was built as an assignment for CPSC 599.86 - Computer Haptics at the University of Calgary under Dr. Sonny Chan.
+This was made for an assignment in [CPSC 599.86 - Computer Haptics](https://pages.cpsc.ucalgary.ca/~sonny.chan/cpsc599.86/) at the University of Calgary under [Dr. Sonny Chan](http://vt2.cpsc.ucalgary.ca/). It uses the [CHAI3D](http://www.chai3d.org/) haptics engine.
 
-It is a basic dynamics engine (rigidbody physics simulation) supporting dynamic and static rigidbodies, and spring constraints. Note that the TorsionSpring is unfinished and broken.
+It is a basic dynamics engine (rigidbody physics simulation) supporting dynamic and static rigidbodies with sphere colliders, and spring constraints. Note that the TorsionSpring is unfinished and broken.
 
 # Install
 
-Unfortunately this will only work for Windows with Visual Studio, because I didn't bother with CMake. However, given its structure _should_ be easy to port to other platforms using CMake.
+Unfortunately this will only work for Windows with Visual Studio, because I didn't bother with CMake. However, given its structure, it _should_ be easy to port to other platforms using CMake.
 
 The project is structured as a CHAI3D module, so after downloading and building CHAI3D, simply clone the project into the CHAI3D/modules directory, and then build with Visual Studio.
 
