@@ -10,7 +10,7 @@ Unfortunately this will only work for Windows with Visual Studio, because I didn
 
 The project is structured as a CHAI3D module, so after downloading and building CHAI3D, simply clone the project into the CHAI3D/modules directory, and then build with Visual Studio.
 
-# dynamics-testing readme
+# chai3d-dynamics
 
 ## Controls
 
